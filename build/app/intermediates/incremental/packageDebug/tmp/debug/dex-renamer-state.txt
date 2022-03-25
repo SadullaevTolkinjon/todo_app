@@ -1,0 +1,4 @@
+#Sat Mar 26 00:34:17 UZT 2022
+base.0=/home/tolik/Documents/flutterNew/todo_app/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

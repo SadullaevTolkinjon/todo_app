@@ -12,7 +12,6 @@ class InitialPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          
           children: [
             Padding(
               padding:
@@ -32,17 +31,36 @@ class InitialPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:  EdgeInsets.only(left: getWidth(62),top: getHeight(170)),
-              
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize:Size(getWidth(258), getHeight(56))
+              padding: EdgeInsets.only(left: getWidth(62), top: getHeight(170)),
+              child: GestureDetector(
+                child: Container(
+                  height: getHeight(56),
+                  width: getWidth(258),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(getHeight(10)),
+                    gradient: lineraGradient(),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Get Started",
+                      style: TextStyle(color: ConstantsMy.whiteColor),
+                    ),
+                  ),
                 ),
-                  onPressed: () {}, child: const Text("Get Started"),),
-            )
+                onTap: () {
+                  Navigator.pushNamed(context, "/home");
+                },
+              ),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  LinearGradient lineraGradient() {
+    return LinearGradient(
+      colors: [ConstantsMy.greenGradient, ConstantsMy.greenGradient2],
     );
   }
 }
