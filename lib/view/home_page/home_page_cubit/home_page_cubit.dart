@@ -50,4 +50,9 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(TappedState(index));
     }
   }
+
+  void deleteIndexOfData(int index) {
+    data.remove(index);
+    emit(DeleteState(index));
+  }
 }

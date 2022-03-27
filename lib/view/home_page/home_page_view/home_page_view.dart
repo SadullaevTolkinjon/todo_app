@@ -23,7 +23,7 @@ class Homepage extends StatelessWidget {
             modalSheet(
               context,
             );
-          } else if (state is DatasState) {}
+          } 
         }),
         builder: (context, state) => scaffoldMy(context, state),
       ),
@@ -65,10 +65,10 @@ class Homepage extends StatelessWidget {
                       ),
                     ),
                   ),
-              Padding(
+                  Padding(
                     padding:
                         EdgeInsets.only(left: getWidth(16), top: getHeight(10)),
-                    child: data.isEmpty?null :const NotificationContainer(),
+                    child: data.isEmpty ? null : const NotificationContainer(),
                   )
                 ],
               ),

@@ -194,6 +194,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_slidable",
+      "rootUri": "file:///home/tolik/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_slidable-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///home/tolik/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.0.3",
       "packageUri": "lib/",
@@ -566,7 +572,7 @@
       "languageVersion": "2.16"
     }
   ],
-  "generated": "2022-03-27T09:12:43.081143Z",
+  "generated": "2022-03-27T12:48:28.605581Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }

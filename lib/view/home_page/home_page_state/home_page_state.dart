@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_test_app/core/data/local_data/local_data.dart';
 import 'package:to_do_test_app/core/model/model.dart';
 import 'package:to_do_test_app/core/service/service.dart';
 
@@ -26,7 +27,6 @@ class ModalShetState extends HomePageState {
 
 class AddDataState extends HomePageState {
   String val;
-  
 
   List lst;
   AddDataState(this.val, this.lst);
@@ -39,7 +39,17 @@ class CheckBoxValState extends HomePageState {
   bool val;
   CheckBoxValState(this.val);
 }
+
 class TappedState extends HomePageState {
   int val;
   TappedState(this.val);
+}
+
+class DeleteState extends HomePageState {
+  int val;
+  DeleteState(this.val);
+
+  del() {
+    data.remove(val);
+  }
 }

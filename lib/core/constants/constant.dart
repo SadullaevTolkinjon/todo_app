@@ -21,6 +21,8 @@ class ConstantsMy {
   static Color litleTextColor = const Color(0XFFA1A1A1);
   static Color addIconColor = const Color.fromRGBO(248, 87, 195, 1);
   static Color addTaskColor = const Color(0XFF6894EE);
+  static Color slideColRed = const Color(0xFFFE4A49);
+  static Color slideColBlue = const Color(0xFF21B7CA);
 //Fontstyle
   static String fontFamilyRubik = "Rubik";
 
@@ -30,4 +32,9 @@ class ConstantsMy {
   static String addIcon = "assets/images/adds.svg";
   static String tascIcon = "assets/images/grid.svg";
   static String noTask = "assets/images/task.png";
+
+  // Actions or Motion
+  
+
+
 }
