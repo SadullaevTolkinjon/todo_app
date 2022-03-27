@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_test_app/core/constants/constant.dart';
-import 'package:to_do_test_app/core/routes/routes.dart';
+import 'package:to_do_test_app/core/model/model.dart';
+import 'package:to_do_test_app/core/utils/routes/routes.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox<NotesModel>("notes");
+  Hive.registerAdapter(NotesModelAdapter());
   runApp(const MyApp());
 }
 

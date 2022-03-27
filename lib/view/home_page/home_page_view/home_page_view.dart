@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:to_do_test_app/core/constants/constant.dart';
+import 'package:to_do_test_app/core/data/local_data/local_data.dart';
 import 'package:to_do_test_app/core/utils/size_config/size_config.dart';
 import 'package:to_do_test_app/core/utils/widgets/widgets.dart';
+import 'package:to_do_test_app/view/home_page/home_page_cubit/home_page_cubit.dart';
+import 'package:to_do_test_app/view/home_page/home_page_state/home_page_state.dart';
+import 'package:to_do_test_app/view/home_page/home_page_view/modal_shet.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -9,13 +15,29 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    return BlocProvider(
+      create: (_) => HomePageCubit(),
+      child: BlocConsumer<HomePageCubit, HomePageState>(
+        listener: ((context, state) {
+          if (state is ModalShetState) {
+            modalSheet(
+              context,
+            );
+          } else if (state is DatasState) {}
+        }),
+        builder: (context, state) => scaffoldMy(context, state),
+      ),
+    );
+  }
+
+  Scaffold scaffoldMy(BuildContext context, state) {
     return Scaffold(
       backgroundColor: ConstantsMy.scaffoldBackColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Container(
-              height: getHeight(248),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: data.isEmpty ? getHeight(126) : getHeight(248),
               decoration: BoxDecoration(
                 gradient: linearGradient(),
               ),
@@ -43,38 +65,44 @@ class Homepage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
+              Padding(
                     padding:
                         EdgeInsets.only(left: getWidth(16), top: getHeight(10)),
-                    child: const NotificationContainer(),
+                    child: data.isEmpty?null :const NotificationContainer(),
                   )
                 ],
               ),
             ),
-          ),
-          SliverGrid(
-            delegate: SliverChildBuilderDelegate(((context, index) {
-              return Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("Today"),
-                    SizedBox(
-                      height: getHeight(200),
-                      child: ListView.builder(itemBuilder: (_, __) {
-                        return  Card(
-                          child: ListTile(title: Text("salom")),
-                        );
-                      }),
-                    )
-                  ],
+            SizedBox(
+              height: getHeight(500),
+              child: context
+                  .watch<HomePageCubit>()
+                  .bodies[context.watch<HomePageCubit>().indexOfNavBar],
+            )
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: ConstantsMy.blueGradient2,
+        items: [
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(ConstantsMy.homeIcon), label: "Home"),
+          BottomNavigationBarItem(
+              icon: FloatingActionButton(
+                onPressed: () {},
+                child: SvgPicture.asset(
+                  ConstantsMy.addIcon,
+                  color: ConstantsMy.whiteColor,
                 ),
-              );
-            }), childCount: 10),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1),
-          )
+                backgroundColor: ConstantsMy.addIconColor,
+              ),
+              label: "Add"),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(ConstantsMy.tascIcon), label: "Task"),
         ],
+        onTap: (val) {
+          context.read<HomePageCubit>().changeIndexOfNavBar(val);
+        },
       ),
     );
   }
