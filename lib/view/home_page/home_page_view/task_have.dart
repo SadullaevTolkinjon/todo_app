@@ -17,111 +17,108 @@ class TaskHave extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: getWidth(18)),
       child: SizedBox(
         height: getHeight(500),
-        child: SizedBox(
-          height: getHeight(500),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                mainAxisExtent: getHeight(55.21),
-                mainAxisSpacing: getHeight(13)),
-            itemBuilder: (context, index) {
-              return Slidable(
-                key: UniqueKey(),
-                endActionPane: ActionPane(
-                  children: [
-                    SlidableAction(
-                      onPressed: (val) {
-                        context.read<HomePageCubit>().deleteIndexOfData(index);
-                      },
-                      backgroundColor: ConstantsMy.slideColRed,
-                      foregroundColor: ConstantsMy.whiteColor,
-                      icon: Icons.delete,
-                      label: 'Delete',
-                    ),
-                    SlidableAction(
-                      onPressed: (val) {},
-                      backgroundColor: ConstantsMy.slideColBlue,
-                      foregroundColor: ConstantsMy.whiteColor,
-                      icon: Icons.share,
-                      label: 'Share',
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              mainAxisExtent: getHeight(55.21),
+              mainAxisSpacing: getHeight(13)),
+          itemBuilder: (context, index) {
+            return Slidable(
+              key: UniqueKey(),
+              endActionPane: ActionPane(
+                children: [
+                  SlidableAction(
+                    onPressed: (val) {
+                      context.read<HomePageCubit>().deleteIndexOfData(index);
+                    },
+                    backgroundColor: ConstantsMy.slideColRed,
+                    foregroundColor: ConstantsMy.whiteColor,
+                    icon: Icons.delete,
+                    label: 'Delete',
+                  ),
+                  SlidableAction(
+                    onPressed: (val) {},
+                    backgroundColor: ConstantsMy.slideColBlue,
+                    foregroundColor: ConstantsMy.whiteColor,
+                    icon: Icons.share,
+                    label: 'Share',
+                  ),
+                ],
+                motion: const ScrollMotion(),
+              ),
+              child: Container(
+                height: getHeight(55.21),
+                width: getWidth(339),
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(255, 255, 255, 1),
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(getHeight(5))),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.05),
                     ),
                   ],
-                  motion: const ScrollMotion(),
                 ),
-                child: Container(
-                  height: getHeight(55.21),
-                  width: getWidth(339),
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(255, 255, 255, 1),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(getHeight(5))),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromRGBO(0, 0, 0, 0.05),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      child: Container(
+                        width: getWidth(4),
+                        height: getHeight(55),
+                        color: Colors.amber,
                       ),
-                    ],
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        child: Container(
-                          width: getWidth(4),
-                          height: getHeight(55),
-                          color: Colors.amber,
-                        ),
-                        left: 0,
+                      left: 0,
+                    ),
+                    Positioned(
+                      child: Checkbox(
+                        value: context
+                            .watch<HomePageCubit>()
+                            .checkBoxValue[index],
+                        activeColor: ConstantsMy.greenGradient,
+                        onChanged: (val) {
+                          context
+                              .read<HomePageCubit>()
+                              .changeCheckboxVal(index);
+                        },
+                        shape: const StadiumBorder(),
                       ),
-                      Positioned(
-                        child: Checkbox(
-                          value: context
-                              .watch<HomePageCubit>()
-                              .checkBoxValue[index],
-                          activeColor: ConstantsMy.greenGradient,
-                          onChanged: (val) {
-                            context
-                                .read<HomePageCubit>()
-                                .changeCheckboxVal(index);
-                          },
-                          shape: const StadiumBorder(),
-                        ),
-                        top: getHeight(10),
+                      top: getHeight(10),
+                    ),
+                    Positioned(
+                      child: Text(
+                        "07:00 AM",
+                        style: TextStyle(
+                            fontSize: getHeight(11),
+                            color: ConstantsMy.boxShadColor),
                       ),
-                      Positioned(
-                        child: Text(
-                          "07:00 AM",
+                      left: getWidth(40),
+                      top: getHeight(21),
+                    ),
+                    Positioned(
+                      child: SizedBox(
+                        width: getWidth(180),
+                        child: AutoSizeText(
+                          data[index].toString(),
+                          maxLines: 2,
                           style: TextStyle(
-                              fontSize: getHeight(11),
-                              color: ConstantsMy.boxShadColor),
+                              fontSize: getHeight(14),
+                              color: ConstantsMy.textColorKok),
                         ),
-                        left: getWidth(40),
-                        top: getHeight(21),
                       ),
-                      Positioned(
-                        child: SizedBox(
-                          width: getWidth(180),
-                          child: AutoSizeText(
-                            data[index].toString(),
-                            maxLines: 2,
-                            style: TextStyle(
-                                fontSize: getHeight(14),
-                                color: ConstantsMy.textColorKok),
-                          ),
-                        ),
-                        left: getWidth(100),
-                        top: getHeight(19),
-                      ),
-                      Positioned(
-                        child: SvgPicture.asset("assets/images/bel.svg"),
-                        top: getHeight(21),
-                        right: 10,
-                      )
-                    ],
-                  ),
+                      left: getWidth(100),
+                      top: getHeight(19),
+                    ),
+                    Positioned(
+                      child: SvgPicture.asset("assets/images/bel.svg"),
+                      top: getHeight(21),
+                      right: 10,
+                    )
+                  ],
                 ),
-              );
-            },
-            itemCount: data.length,
-          ),
+              ),
+            );
+          },
+          itemCount: data.length,
         ),
       ),
     );

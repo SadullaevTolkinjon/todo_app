@@ -73,9 +73,8 @@ class Homepage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              height: getHeight(500),
-              child: context
+            Container(height: data.isEmpty ?getHeight(620): getHeight(500),
+            child: context
                   .watch<HomePageCubit>()
                   .bodies[context.watch<HomePageCubit>().indexOfNavBar],
             )
